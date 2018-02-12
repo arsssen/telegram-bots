@@ -26,16 +26,27 @@ const processMessage = message => plugins.reduce((acc, pluginFunc) => {
         .catch(prevResponses => Promise.reject(prevResponses))
 }, Promise.resolve([]))
 
+const log = config.no_log ? () => () => { } : (msg, response) => () => {
+    let ts = new Date().toLocaleString();
+    console.log(`${ts} bot <- ${msg.from.first_name}(${msg.from.username}) : ${msg.text}`)
+    console.log(`${ts} bot -> ${msg.from.first_name}(${msg.from.username}) : ${response}`)
+}
+
 slimbot.on('message', msg => processMessage(msg).then(x => x, x => x).then(
     responses => responses.forEach(response => {
         switch (typeof response) {
             case 'object':
-                slimbot.sendPhoto(msg.chat.id, response).then(console.log, console.log);
+                slimbot
+                    .sendPhoto(msg.chat.id, response)
+                    .then(log(msg, 'file'), log(msg, 'file'));
                 break;
             case 'string':
-                slimbot.sendMessage(msg.chat.id, response);
+                slimbot
+                    .sendMessage(msg.chat.id, response)
+                    .then(log(msg, response), log(msg, response));
                 break;
             case 'undefined':
+                log(msg, 'no response')()
                 break;
         }
     })

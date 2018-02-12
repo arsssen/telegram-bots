@@ -4,6 +4,7 @@
         "authorize",
         "shell"
     ],
+    "no_log": true,
     "admins": [
         "your_telegram_username_here"
     ],
