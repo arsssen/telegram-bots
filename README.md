@@ -37,4 +37,5 @@ Tries to execute received message as a shell command and sends output back to th
 
 ### stream_snapshot
 When receiving any message from the user captures a frame from predefined video stream and sends it to the user as a photo.
+See example configuration values in config.json.
 FFMPEG is required for the plugin to work.

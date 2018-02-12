@@ -10,5 +10,10 @@
     ],
     "authorize_plugin": {
         "silent": true
+    },
+    "stream_snapshot_plugin": {
+        "stream_url": "https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_ts/v8/fileSequence0.ts",
+        "ffmpeg_params": "-y -vframes 1 -r 1",
+        "tmp_file_path": "/tmp/stream_snapshot.jpg"
     }
 }

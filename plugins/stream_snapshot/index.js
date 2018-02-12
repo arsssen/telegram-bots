@@ -1,19 +1,16 @@
 /**
  * This plugin creates a snapshot from video stream (using ffpmeg) and sends it
  * as a photo.
- * Set stream URL and temporary file path below.
+ * Set stream URL and temporary file path in config
  * FFMPEG is obviously required :)
 */
 const exec = require('child_process').exec;
 const fs = require('fs');
 
-const streamURL = "https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_ts/v8/fileSequence0.ts"
-const tmpFilePath = "/tmp/stream_snapshot.jpg"
-
 module.exports = function processMsg(msg, config) {
     return new Promise((resolve, reject) => {
-        //adjust ffmpeg parameters as needed
-        exec(`ffmpeg -y -i ${streamURL} -vframes 1 -r 1 ${tmpFilePath}`,
+        let tmpFilePath = config.stream_snapshot_plugin.tmp_file_path || "/tmp/stream_snapshot.jpg"
+        exec(`ffmpeg -i ${config.stream_snapshot_plugin.stream_url} ${config.stream_snapshot_plugin.ffmpeg_params} ${tmpFilePath}`,
             (e, stdout, stderr) => {
                 if (e) {
                     console.log(e);
