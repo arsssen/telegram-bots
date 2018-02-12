@@ -1,0 +1,10 @@
+{
+  "name": "telegram-bots",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node start.js config.json"
+  },
+  "dependencies": {
+    "slimbot": "^0.7.10"
+  }
+}

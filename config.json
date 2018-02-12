@@ -1,0 +1,13 @@
+{
+    "token": "your_telegram_bot_token_here",
+    "plugins": [
+        "authorize",
+        "shell"
+    ],
+    "admins": [
+        "your_telegram_username_here"
+    ],
+    "authorize_plugin": {
+        "silent": true
+    }
+}
