@@ -26,3 +26,15 @@ Plugin must return a promise, which is resolved or rejected with reponse value.
 If response value is *undefined*, no response will be sent.
 If promise is resolved, message will be passed to the next plugin in the chain for processing.
 If promise is rejected, message will not be passed to next plugin(s).
+
+## Included plugins
+
+### authorize
+Checks if the user sending message to bot is in the list of "admins" (set in config file).  If yes, passes execution to next plugin in chain, if no, stops processing the message (and optionally sends "ot authorized" message to the user). Put this plugin before any other plugins in chain to protect them from receiving messages from unathorized users. Can be also put in the middle of plugins chain, in that case will protect only plugins coming after it.
+
+### shell
+Tries to execute received message as a shell command and sends output back to the user. Be careful when using it ;)
+
+### stream_snapshot
+When receiving any message from the user captures a frame from predefined video stream and sends it to the user as a photo.
+FFMPEG is required for the plugin to work.
